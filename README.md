@@ -3,10 +3,10 @@ Command to Activate the Virtual env-</br></br>
 For Linux Environment & [Git Bash on Window](https://git-scm.com/download/win)</br>
  `. venv_getnote/Scripts/activate` (my virtual env name- venv_getnote)</br></br>
 For Windows-</br>
-`vcommerce\Scripts\activate`
+`venv_getnote\Scripts\activate`
 </br></br>
 For Mac-</br>
-`. vcommerce/bin/activate` or `vcommerce myvenv/bin/activate`
+`. venv_getnote/bin/activate` or `venv_getnote myvenv/bin/activate`
 </br></br>
 To Run django Server- `python manage.py runserver`</br></br>
 To Run the django Interactive interpreter (shell)- `python manage.py shell`</br></br>
