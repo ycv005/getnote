@@ -2,5 +2,12 @@
 
 {% block content %}
     <!-- https://docs.djangoproject.com/en/3.0/ref/templates/language/#template-inheritance -->
-    <h2 class="text-center">Hello world, we are working</h2>  
+    {% if user.is_authenticated %}
+        {% include 'snippet/note.html' %}
+    {% else %}
+        <div class="alert alert-primary my-4" role="alert">
+            <h4 class="text-center">Join GetNote to add notes here.</h4>
+        </div>    
+    {% endif %}
+        
 {% endblock content %}
