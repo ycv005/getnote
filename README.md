@@ -1,4 +1,9 @@
 # GetNote
+(Optional) First of [Install Virtual Env](https://pypi.org/project/virtualenv/)
+</br>
+(Optional) Creating Virtual Env-
+`python -m venv venv_getnote` 
+</br></br>
 Command to Activate the Virtual env-</br></br>
 For Linux Environment & [Git Bash on Window](https://git-scm.com/download/win)</br>
  `. venv_getnote/Scripts/activate` (my virtual env name- venv_getnote)</br></br>
