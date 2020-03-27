@@ -4,14 +4,13 @@ from getnote import settings
 # Create your models here.
 
 class Note(models.Model):
-    uesr = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     title = models.CharField(max_length=30)
-    text = models.CharField(max_length=1000,null=True,blank=True)
-    # change text's field to TextField from CharField
+    text = models.TextField(null=True,blank=True)
     # color =
     # pin =
-    # tag = 
-    # collaborator = 
+    # tag =
+    # collaborator =
     created_date = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 

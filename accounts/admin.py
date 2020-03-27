@@ -1,15 +1,13 @@
 from django.contrib import admin
 from django import forms
-from django.forms import ModelForm
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin
 from .models import User
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-# https://docs.djangoproject.com/en/3.0/topics/forms/modelforms/
 # A form for creating new users.
-class UserCreationForm(ModelForm):
+class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
     # (https://stackoverflow.com/questions/39476334/why-class-meta-is-necessary-while-creating-a-model-form)

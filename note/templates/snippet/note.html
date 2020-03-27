@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Add Note</button>
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Add Note</button>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -10,14 +10,14 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form action="{% url 'note:add_note' %}" method="post" class="note-form">{% csrf_token %}
           <div class="form-group">
             <label for="note-title" class="col-form-label">Title:</label>
-            <input type="text" class="form-control" id="note-title">
+            <input name="title" type="text" class="form-control" id="note-title">
           </div>
           <div class="form-group">
             <label for="note-text" class="col-form-label">Text Here:</label>
-            <textarea class="form-control" id="note-text"></textarea>
+            <textarea name="text" class="form-control" id="note-text"></textarea>
           </div>
         </form>
       </div>
@@ -26,5 +26,20 @@
         <button type="button" class="btn btn-primary">Save</button>
       </div>
     </div>
+  </div>
+</div> -->
+<div class="row">
+  <div class="col-6">
+    <form action="{% url 'note:add_note' %}" method="post" class="note-form">{% csrf_token %}
+      <div class="form-group">
+        <label for="note-title">Title</label>
+        <input type="text" name="title" class="form-control" id="note-title" placeholder="Enter Title">
+      </div>
+      <div class="form-group">
+        <label for="note-description">Description</label>
+        <textarea type="text" name="text" class="form-control" id="note-description" placeholder="Description here"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
   </div>
 </div>

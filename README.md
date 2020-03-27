@@ -1,5 +1,5 @@
 # GetNote
-(Optional) First of [Install Virtual Env](https://pypi.org/project/virtualenv/)
+(Optional) First of all, [Install Virtual Env](https://pypi.org/project/virtualenv/)
 </br>
 (Optional) Creating Virtual Env-
 `python -m venv venv_getnote` 
