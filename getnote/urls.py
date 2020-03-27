@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',HomePage.as_view() ,name='home_page'),
     path('', include(('accounts.urls','accounts'),namespace='accounts')),
+    path('note/', include(('note.urls','note'),namespace='note')),
 ]
