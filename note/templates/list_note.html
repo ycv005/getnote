@@ -1,0 +1,9 @@
+<div class="container">
+    <div class="row">
+        {% for note in note_list %}
+            <div class="col-3">
+                {% include 'snippet/preview.html' with note=note %}
+            </div>
+        {% endfor %}
+    </div>
+</div>

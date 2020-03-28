@@ -1,8 +1,10 @@
 # GetNote
 (Optional) First of all, [Install Virtual Env](https://pypi.org/project/virtualenv/)
 </br>
-(Optional) Creating Virtual Env-
+(Optional) Creating Virtual Env(venv_getnote is my venv name, choose your acc.)-
 `python -m venv venv_getnote` 
+</br></br>
+Install django- `pip install django`
 </br></br>
 Command to Activate the Virtual env-</br></br>
 For Linux Environment & [Git Bash on Window](https://git-scm.com/download/win)</br>
