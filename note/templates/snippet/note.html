@@ -33,7 +33,7 @@
     <form action="{% url 'note:add_note' %}" method="post" class="note-form">{% csrf_token %}
       <div class="form-group">
         <label for="note-title">Title</label>
-        <input type="text" name="title" class="form-control" id="note-title" placeholder="Enter Title">
+        <input type="text" name="title" class="form-control" id="note-title" placeholder="Enter Title" required>
       </div>
       <div class="form-group">
         <label for="note-description">Description</label>

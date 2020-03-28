@@ -1,0 +1,9 @@
+<div class="card shadow p-3 mb-5 bg-white rounded" style="width: 16rem;">
+    <div class="card-body">
+        <h5 class="card-title">{{ note.title }}</h5>
+        <small class="card-subtitle mb-2 pt-2 text-muted">Last mod: {{ note.last_modified.date }}</small>
+        <br>
+        <p class="card-text">{{ note.text|truncatechars:100 }}</p>
+        <button type="button" class="btn btn-outline-primary">View Card</button>
+    </div>
+</div>
