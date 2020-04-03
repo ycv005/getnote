@@ -1,15 +1,15 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Note</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNoteModel">Add Note</button>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addNoteModel" tabindex="-1" role="dialog" aria-labelledby="addNoteModelLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Note</h5>
+        <h5 class="modal-title" id="addNoteModelLabel">Add Note</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="{% url 'note:add_note' %}" method="post" class="note-form" enctype="multipart/form-data">{% csrf_token %}
+      <form action="{% url 'note:add_note' %}" method="post" id="note-form" enctype="multipart/form-data">{% csrf_token %}
         <div class="modal-body">
             <div class="form-group">
               <label for="note-title" class="col-form-label">Title:</label>
@@ -32,22 +32,3 @@
     </div>
   </div>
 </div>
-<!-- <div class="row">
-  <div class="col-6">
-    <form action="{% url 'note:add_note' %}" method="post" class="note-form" enctype="multipart/form-data">{% csrf_token %}
-      <div class="form-group">
-        <label for="note-title">Title</label>
-        <input type="text" name="title" class="form-control" id="note-title" placeholder="Enter Title" required>
-      </div>
-      <div class="form-group">
-        <label for="note-description">Description</label>
-        <textarea type="text" name="text" class="form-control" id="note-description" placeholder="Description here"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="note-image">Images</label>
-        <input type="file" name="images" class="form-control-file" id="note-image" multiple>
-      </div>
-      <button type="submit" class="btn btn-primary stnd-submit">Submit</button>
-    </form>
-  </div>
-</div> -->
