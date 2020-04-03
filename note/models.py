@@ -6,7 +6,7 @@ def user_directory_path(instance,filename):
     base_name = os.path.basename(filename)
     name,ext = os.path.splitext(base_name)
 
-    return "note/user/"+ str(instance.note.id) + "/"+"IMG_" + str(instance.pk)+ext
+    return "note/user/"+ str(instance.note.user.id) + "/"+ str(instance.note.id)+ "/"+"IMG_" + str(instance.note.id)+ext
 
 class Note(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
