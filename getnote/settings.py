@@ -122,3 +122,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+# https://docs.djangoproject.com/en/3.0/howto/static-files/#serving-files-uploaded-by-a-user-during-development
+MEDIA_URL = '/media/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    '/var/www/static/',
+]
+
+# STATIC_ROOT is the single root directory from where the Django app 
+# will serve the static files in production.
+# All static files are compiled and put in the STATIC_ROOT
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles','static_root')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'staticfiles','media_root')

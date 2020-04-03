@@ -1,7 +1,12 @@
 from django.db import models
 from getnote import settings
+import os
 
-# Create your models here.
+def user_directory_path(instance,filename):
+    base_name = os.path.basename(filename)
+    name,ext = os.path.splitext(base_name)
+
+    return "note/user/"+ str(instance.note.user.id) + "/"+ str(instance.note.id)+ "/"+"IMG_" + str(instance.note.id)+ext
 
 class Note(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
@@ -20,4 +25,9 @@ class Note(models.Model):
     def __str__(self):
         return self.title
 
-# class Images(models.Model):
+class Images(models.Model):
+    note = models.ForeignKey(Note,on_delete=models.CASCADE)
+    image = models.ImageField(upload_to=user_directory_path,null=True,blank=True)
+
+    def __str__(self):
+        return self.note.title + " Img"
