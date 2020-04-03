@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from accounts import urls
+from django.conf import settings
+from django.conf.urls.static import static
 from generic_views import HomePage
 
 urlpatterns = [
@@ -24,3 +26,8 @@ urlpatterns = [
     path('', include(('accounts.urls','accounts'),namespace='accounts')),
     path('note/', include(('note.urls','note'),namespace='note')),
 ]
+
+if settings.DEBUG:
+# https://docs.djangoproject.com/en/3.0/howto/static-files/#serving-static-files-during-development
+    urlpatterns+= static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 
+    urlpatterns+= static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
