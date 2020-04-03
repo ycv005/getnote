@@ -125,13 +125,10 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.0/howto/static-files/#serving-files-uploaded-by-a-user-during-development
 MEDIA_URL = '/media/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-    '/var/www/static/',
-]
-
 # STATIC_ROOT is the single root directory from where the Django app 
-# will serve the static files in production.
+# will serve the static files in 'production'. You don't need it on development
 # All static files are compiled and put in the STATIC_ROOT
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles','static_root')
+if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles','static_root')
+# media_root store the user-uploaded media
 MEDIA_ROOT = os.path.join(BASE_DIR, 'staticfiles','media_root')
