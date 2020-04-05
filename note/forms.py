@@ -8,6 +8,7 @@ class NoteForm(forms.ModelForm):
 
 class NoteFullForm(NoteForm):
     images = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}),required=False)
+    tags = forms.CharField(max_length=20, required=False)
 
     class Meta(NoteForm.Meta):
-        fields = NoteForm.Meta.fields + ['images',]
+        fields = NoteForm.Meta.fields + ['images','tags']

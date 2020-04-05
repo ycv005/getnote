@@ -5,6 +5,8 @@ $(document).ready(function(){
         var form = $("#note-form");
         var url = form.attr("action");
         var httpMethod = form.attr("method");
+        var tags = $("#note-tag").tagsinput('items');
+        // console.log("here is tag list",tags);
         $.ajax({
         url: url,
         method: httpMethod,
@@ -14,7 +16,6 @@ $(document).ready(function(){
             modal.modal('toggle');
             var shortText = jQuery.trim(data.text).substring(0, 80)
             var shortTitle = jQuery.trim(data.title).substring(0, 21)
-            // adding div element 
         // we can't include the snippet bcoz- Any jQuery calls will happen after the DOM is loaded. While any include statements will happen before.
             $(".note-list-row").prepend(
                 '<div class="col-3">'+

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .forms import NoteForm, NoteFullForm
-from .models import Note, Images
+from .models import Note, Image, Tag
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse_lazy
 import datetime
@@ -13,9 +13,13 @@ def addNoteView(request):
             user = request.user
             title = form.cleaned_data['title']
             text = form.cleaned_data['text']
+            tags = form.cleaned_data['tags'].strip().split(",")
             note_obj = Note.objects.create(user=user,title=title,text=text) #create will create as well as save too in db.
+            for i in tags:
+                tag_obj, created = Tag.objects.get_or_create(name=i)
+                note_obj.tags.add(tag_obj)
             for f in files:
-                Images.objects.create(note=note_obj,image=f)
+                Image.objects.create(note=note_obj,image=f)
             date = datetime.datetime.now().strftime('%B') +" "+ datetime.datetime.now().strftime('%d')+", "+datetime.datetime.now().strftime('%Y')
             response_data = {
             "title":title,
