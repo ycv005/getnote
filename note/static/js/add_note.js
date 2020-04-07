@@ -1,16 +1,40 @@
 $(document).ready(function(){
+    $('#addNoteModel').on('show.bs.modal', function (event) {
+        var getTagList = $("#tag-list").text().split(",");
+        $('[name="tags"]').tagify({
+            whitelist: getTagList,
+            maxTags: 10,
+            dropdown: {
+                // maxItems: 20,           // <- mixumum allowed rendered suggestions
+                classname: "tags-look", // <- custom classname for this dropdown, so it could be targeted
+                enabled: 0,             // <- show suggestions on focus
+                // closeOnSelect: true,    // <- hide the suggestions dropdown once an item has been selected
+                duplicates :false,
+            },
+        })
+      })
     $(document).on('submit',"#note-form",function(e){
         e.preventDefault();
         var modal = $("#addNoteModel");
         var form = $("#note-form");
         var url = form.attr("action");
         var httpMethod = form.attr("method");
-        var tags = $("#note-tag").tagsinput('items');
-        // console.log("here is tag list",tags);
+        var TagValues = JSON.parse($('[name="tags"]').tagify().val())
+        var TagArray = []
+        for(let i=0;i<TagValues.length;i++){
+            TagArray.push(TagValues[i].value)
+        }
+        var dataToSend = $(this).serializeArray();
+        for (let index = 0; index < dataToSend.length; ++index) {
+            if (dataToSend[index].name == "tags") {
+                dataToSend[index].value = TagArray;
+                break;
+            }
+        }
         $.ajax({
         url: url,
         method: httpMethod,
-        data: $(this).serialize(),
+        data: jQuery.param(dataToSend),
         success: function(data){
             document.getElementById("note-form").reset();
             modal.modal('toggle');

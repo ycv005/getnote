@@ -11,7 +11,7 @@ def user_directory_path(instance,filename):
     return "note/user/"+ str(instance.note.user.id) + "/"+ str(instance.note.id)+ "/"+"IMG_" + str(instance.note.id)+ext
     
 class Tag(models.Model):
-    name = models.CharField(max_length=20,unique=True)
+    name = models.CharField(max_length=40,unique=True)
     slug = models.SlugField(null=False,unique=True)
     class Meta:
         ordering= ['name']
