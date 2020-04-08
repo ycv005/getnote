@@ -4,6 +4,7 @@ from .models import Note, Image, Tag
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse_lazy
 import datetime
+from django.views.generic import ListView
 
 def addNoteView(request):
     if request.method == "POST" and request.is_ajax():
@@ -34,3 +35,30 @@ def addNoteView(request):
     else:
         form = NoteFullForm()
     return HttpResponseRedirect('/')
+
+class TagFilterView(ListView):
+    template_name = "base/home_page.html"
+    model = Note
+    
+    def get_queryset(self):
+        tags = self.kwargs['slug']
+        queryset = super(TagFilterView, self).get_queryset()
+        if self.request.user.is_authenticated:
+            user = self.request.user
+            queryset = Note.objects.filter(user_id=user.id).filter(tags__name=tags)
+        else:
+            queryset = Note.objects.none()
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super(TagFilterView, self).get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            tagList = ""
+            for q in getDistinctUserTags(self.request):
+                tagList+=q.name+","
+            context['tagList']=tagList[:len(tagList)-1]
+        return context
+
+def getDistinctUserTags(request):
+    user = request.user
+    return Tag.objects.filter(note__user=user).distinct()

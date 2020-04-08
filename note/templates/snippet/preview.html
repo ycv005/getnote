@@ -4,6 +4,11 @@
         <small class="card-subtitle mb-2 pt-2 text-muted">Last mod: {{ note.last_modified.date }}</small>
         <br>
         <p class="card-text">{{ note.text|truncatechars:80 }}</p>
-        <button type="button" class="btn btn-outline-primary">View Card</button>
+        <div class="diplay:flex">
+            {% for tag in note.getNoteTags %}
+                <a href="{% url 'note:tag_filter' tag.slug %}" class="badge badge-primary">#{{ tag.name }}</a>
+            {% endfor %}
+        </div>
+        <button type="button" class="btn btn-outline-primary mt-1">View Card</button>
     </div>
 </div>
