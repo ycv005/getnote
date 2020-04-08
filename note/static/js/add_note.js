@@ -1,6 +1,10 @@
 $(document).ready(function(){
     $('#addNoteModel').on('show.bs.modal', function (event) {
         var getTagList = $("#tag-list").text().split(",");
+        console.log("taglist got, in text",$("#tag-list").text())
+        if($("#tag-list").text()==""){
+            var getTagList = [];
+        }
         $('[name="tags"]').tagify({
             whitelist: getTagList,
             maxTags: 10,
@@ -54,6 +58,7 @@ $(document).ready(function(){
                     '</div>'+
                 '</div>'
             )
+            $("#empty-note-msg").addClass("d-none");
         },
         error: function(xhr,errmsg,err){
             console.log("below is the error msg")
