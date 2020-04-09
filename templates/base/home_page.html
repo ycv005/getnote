@@ -8,7 +8,7 @@
         {% include 'list_note.html' with note_list=object_list %}
     {% else %}
         <div class="alert alert-primary my-4" role="alert">
-            <h4 class="text-center">Join GetNote to add notes here.</h4>
+            <h4 class="text-center">Join GetNote to add notes here. <a href="{% url "accounts:login_page" %}">Login</a></h4>
         </div>    
     {% endif %}
         
