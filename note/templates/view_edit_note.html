@@ -1,0 +1,25 @@
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".note-model-view").hover(function(){
+            var id= $(this).attr("value");
+            $("#view-edit-note-"+id.toString()).click(function(event){
+            // inject data
+            var url = "{% url 'note:modfiy_note' %}"
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                data: id,
+                type: 'POST',
+                success: function(data){
+                    $("#note-title").val(data.title);
+                    $("#note-text").val(data.text);
+                    $('[name=tags]').data('tagify').addTags(data.tags)
+                },
+                error: function(error){
+                    console.log("got error")
+                }
+                })
+            });
+        });
+    });
+</script>

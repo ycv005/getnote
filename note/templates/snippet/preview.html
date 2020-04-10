@@ -9,6 +9,6 @@
                 <a href="{% url 'note:tag_filter' tag.slug %}" class="badge badge-primary">#{{ tag.name }}</a>
             {% endfor %}
         </div>
-        <button type="button" class="btn btn-outline-primary mt-1">View Card</button>
+        <button type="button" value="{{ note.id }}" id="view-edit-note-{{ note.id }}" class="btn btn-outline-primary mt-1 note-model-view" data-toggle="modal" data-target="#addNoteModel">View Card</button>
     </div>
 </div>

@@ -7,4 +7,5 @@
     {{ form.as_p }}
     <button type="submit">Login</button>
   </form>
+  <p class="mt-2">Don't have account- <a href="{% url "accounts:signup_page" %}">Sign Up</a></p>
 {% endblock content %}
