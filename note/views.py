@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse_lazy
 import datetime
 from django.views.generic import ListView
+import json
 
 def addNoteView(request):
     if request.method == "POST" and request.is_ajax():
@@ -35,6 +36,20 @@ def addNoteView(request):
     else:
         form = NoteFullForm()
     return HttpResponseRedirect('/')
+
+def modifyNote(request):
+    if request.is_ajax():
+        note_id = request.body
+        note_obj = Note.objects.get(id=note_id)
+        tags = []
+        for t in note_obj.tags.all():
+            tags.append(t.name)
+        response_data = {
+            "title": note_obj.title,
+            "text":note_obj.text,
+            "tags": tags,
+        }
+        return JsonResponse(response_data)
 
 class TagFilterView(ListView):
     template_name = "base/home_page.html"

@@ -1,7 +1,6 @@
 $(document).ready(function(){
     $('#addNoteModel').on('show.bs.modal', function (event) {
         var getTagList = $("#tag-list").text().split(",");
-        console.log("taglist got, in text",$("#tag-list").text())
         if($("#tag-list").text()==""){
             var getTagList = [];
         }
@@ -12,7 +11,7 @@ $(document).ready(function(){
                 // maxItems: 20,           // <- mixumum allowed rendered suggestions
                 classname: "tags-look", // <- custom classname for this dropdown, so it could be targeted
                 enabled: 0,             // <- show suggestions on focus
-                // closeOnSelect: true,    // <- hide the suggestions dropdown once an item has been selected
+                closeOnSelect: false,    // <- hide the suggestions dropdown once an item has been selected
                 duplicates :false,
             },
         })
