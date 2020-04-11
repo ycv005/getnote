@@ -13,13 +13,26 @@
                 success: function(data){
                     $("#note-title").val(data.title);
                     $("#note-text").val(data.text);
-                    $('[name=tags]').data('tagify').addTags(data.tags)
+                    var TagValues = $('[name="tags"]').tagify().val()
+                    if (TagValues.length==0){
+                        $('[name=tags]').data('tagify').addTags(data.tags)
+                    }
+                    // after doing anything, remove the tags
                 },
                 error: function(error){
                     console.log("got error")
                 }
                 })
             });
+        });
+
+        $('#addNoteModel').on('hidden.bs.modal', function (e) {
+            console.log("a model dismiss is called")
+            $('#addNoteModel form')[0].reset();
+            // now to remove the tags
+            var input = $('[name=tags]').tagify()
+            var jqTagify = input.data('tagify');
+            jqTagify.removeAllTags();
         });
     });
 </script>
