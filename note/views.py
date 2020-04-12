@@ -49,7 +49,7 @@ def modifyNote(request):
         tags = []
         for t in note_obj.tags.all():
             tags.append(t.name)
-        return getNoteResponseData(note_obj)
+        return getNoteResponseData(note_obj,tags)
 
 class TagFilterView(ListView):
     template_name = "base/home_page.html"
@@ -78,11 +78,12 @@ def getDistinctUserTags(request):
     user = request.user
     return Tag.objects.filter(note__user=user).distinct()
 
-def getNoteResponseData(note_obj):
+def getNoteResponseData(note_obj,tags=None):
     response_data = {
             "id": note_obj.id,
             "title":note_obj.title,
             "text":note_obj.text,
+            "tags": tags,
             "last_mod": note_obj.last_modified
             }
     return JsonResponse(response_data)
