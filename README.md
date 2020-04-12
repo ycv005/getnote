@@ -8,7 +8,7 @@ Install django- `pip install django`
 </br></br>
 Command to Activate the Virtual env-</br></br>
 For Linux Environment & [Git Bash on Window](https://git-scm.com/download/win)</br>
- `. venv_getnote/Scripts/activate` (my virtual env name- venv_getnote)</br></br>
+ `. venv_getnote/bin/activate` (my virtual env name- venv_getnote)</br></br>
 For Windows-</br>
 `venv_getnote\Scripts\activate`
 </br></br>
