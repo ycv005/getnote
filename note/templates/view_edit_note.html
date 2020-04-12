@@ -12,6 +12,7 @@
                 type: 'POST',
                 success: function(data){
                     $("#note-title").val(data.title);
+                    $("#note-id").val(data.id);
                     $("#note-text").val(data.text);
                     var TagValues = $('[name="tags"]').tagify().val()
                     if (TagValues.length==0){
