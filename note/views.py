@@ -14,21 +14,26 @@ def addNoteView(request):
         if form.is_valid():
             user = request.user
             title = form.cleaned_data['title']
+            note_id = form.cleaned_data['note_id']
             text = form.cleaned_data['text']
             tags = form.cleaned_data['tags'].strip().split(",")
-            note_obj = Note.objects.create(user=user,title=title,text=text) #create will create as well as save too in db.
+            if not note_id:
+                note_obj = Note.objects.create(user=user,title=title,text=text) #create will create as well as save too in db.
+            else:
+                note_obj = Note.objects.get(id=note_id)
             for i in tags:
                 tag_obj, created = Tag.objects.get_or_create(name=i)
-                note_obj.tags.add(tag_obj)
+                note_obj.tags.add(tag_obj) #it won't add duplicated as stated in django docs
             for f in files:
                 Image.objects.create(note=note_obj,image=f)
             date = datetime.datetime.now().strftime('%B') +" "+ datetime.datetime.now().strftime('%d')+", "+datetime.datetime.now().strftime('%Y')
             response_data = {
+            "id": note_obj.id,
             "title":title,
             "text":text,
             "last_mod": date
             }
-            return JsonResponse(response_data)
+            return getNoteResponseData(note_obj)
         else:
             print("Form invalid, see below error msg")
             print(form.errors)
@@ -44,12 +49,7 @@ def modifyNote(request):
         tags = []
         for t in note_obj.tags.all():
             tags.append(t.name)
-        response_data = {
-            "title": note_obj.title,
-            "text":note_obj.text,
-            "tags": tags,
-        }
-        return JsonResponse(response_data)
+        return getNoteResponseData(note_obj)
 
 class TagFilterView(ListView):
     template_name = "base/home_page.html"
@@ -77,3 +77,12 @@ class TagFilterView(ListView):
 def getDistinctUserTags(request):
     user = request.user
     return Tag.objects.filter(note__user=user).distinct()
+
+def getNoteResponseData(note_obj):
+    response_data = {
+            "id": note_obj.id,
+            "title":note_obj.title,
+            "text":note_obj.text,
+            "last_mod": note_obj.last_modified
+            }
+    return JsonResponse(response_data)
