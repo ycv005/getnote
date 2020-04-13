@@ -41,22 +41,24 @@ $(document).ready(function(){
         success: function(data){
             document.getElementById("note-form").reset();
             modal.modal('toggle');
-            var shortText = jQuery.trim(data.text).substring(0, 80)
-            var shortTitle = jQuery.trim(data.title).substring(0, 21)
-        // we can't include the snippet bcoz- Any jQuery calls will happen after the DOM is loaded. While any include statements will happen before.
-            $(".note-list-row").prepend(
-                '<div class="col-3">'+
-                    '<div class="card shadow mb-3 bg-white rounded" style="width: 16rem;">'+
-                        '<div class="card-body">'+
-                            '<h5 class="card-title">'+shortTitle+'</h5>'+
-                            '<small class="card-subtitle mb-2 pt-2 text-muted">Last mod: '+data.last_mod+'</small>'+
-                            '<br>'+
-                            '<p class="card-text">'+shortText+'</p>'+
-                            '<button type="button" class="btn btn-outline-primary">View Card</button>'+
+            if (data.note_created){
+                var shortText = jQuery.trim(data.text).substring(0, 80)
+                var shortTitle = jQuery.trim(data.title).substring(0, 21)
+            // we can't include the snippet bcoz- Any jQuery calls will happen after the DOM is loaded. While any include statements will happen before.
+                $(".note-list-row").prepend(
+                    '<div class="col-3">'+
+                        '<div class="card shadow mb-3 bg-white rounded" style="width: 16rem;">'+
+                            '<div class="card-body">'+
+                                '<h5 class="card-title">'+shortTitle+'</h5>'+
+                                '<small class="card-subtitle mb-2 pt-2 text-muted">Last mod: '+data.last_mod+'</small>'+
+                                '<br>'+
+                                '<p class="card-text">'+shortText+'</p>'+
+                                '<button type="button" class="btn btn-outline-primary">View Card</button>'+
+                            '</div>'+
                         '</div>'+
-                    '</div>'+
-                '</div>'
-            )
+                    '</div>'
+                )
+            }
             $("#empty-note-msg").addClass("d-none");
         },
         error: function(xhr,errmsg,err){
