@@ -5,7 +5,6 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse_lazy
 import datetime
 from django.views.generic import ListView
-import json
 
 def addNoteView(request):
     if request.method == "POST" and request.is_ajax():

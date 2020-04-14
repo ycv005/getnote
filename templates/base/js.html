@@ -10,7 +10,7 @@
 <!-- Will use this tagList for rendering Tag list-->
 <p id="tag-list" class="d-none">{{ tagList }}</p>
 <!-- Add note js -->
-<script src='{% static 'js/add_note.js' %}'></script>
+{% include 'addNote.html' %}
 <!-- Secure Ajax csrf token JS file -->
 <script src="{% static 'js/csrf_ajax.js' %}"></script>
 

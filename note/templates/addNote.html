@@ -1,4 +1,6 @@
-$(document).ready(function(){
+
+<script type="text/javascript">
+    $(document).ready(function(){
     $('#addNoteModel').on('show.bs.modal', function (event) {
         var getTagList = $("#tag-list").text().split(",");
         if($("#tag-list").text()==""){
@@ -45,19 +47,19 @@ $(document).ready(function(){
                 var shortText = jQuery.trim(data.text).substring(0, 80)
                 var shortTitle = jQuery.trim(data.title).substring(0, 21)
             // we can't include the snippet bcoz- Any jQuery calls will happen after the DOM is loaded. While any include statements will happen before.
-                $(".note-list-row").prepend(
-                    '<div class="col-3">'+
-                        '<div class="card shadow mb-3 bg-white rounded" style="width: 16rem;">'+
-                            '<div class="card-body">'+
-                                '<h5 class="card-title">'+shortTitle+'</h5>'+
-                                '<small class="card-subtitle mb-2 pt-2 text-muted">Last mod: '+data.last_mod+'</small>'+
-                                '<br>'+
-                                '<p class="card-text">'+shortText+'</p>'+
-                                '<button type="button" class="btn btn-outline-primary">View Card</button>'+
-                            '</div>'+
-                        '</div>'+
-                    '</div>'
-                )
+                var note_clone = $(".full-note-col").clone();
+                note_clone.removeClass("d-none");
+                note_clone.find(".card-title").text(shortTitle);
+                note_clone.find(".card-text").text(shortText);
+                console.log("Tag array-",TagArray);
+                for(let i=0;i<TagArray.length;i++){
+                    var url = "note/tag/"+TagArray[i]
+                    note_clone.find("#badge-list").append(
+                        "<a href=\""+url +"\" class=\'badge badge-primary\'>#"+ TagArray[i] +'</a>'
+                    )
+                    console.log("appended a badge");
+                }
+                $(".note-list-row").prepend(note_clone);
             }
             $("#empty-note-msg").addClass("d-none");
         },
@@ -68,3 +70,4 @@ $(document).ready(function(){
       })
     });
 });
+</script>
