@@ -57,7 +57,6 @@ def get_unique_slug(sender, instance, **kwargs):
     slug = slugify(instance.title)
     unique_slug = slug
     while Note.objects.filter(slug=unique_slug).exists():
-        print("slug exist, changing")
         unique_slug = '{}-{}'.format(slug, num)
         num += 1
     instance.slug=unique_slug

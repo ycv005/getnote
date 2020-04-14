@@ -5,7 +5,6 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse_lazy
 import datetime
 from django.views.generic import ListView
-import json
 
 def addNoteView(request):
     if request.method == "POST" and request.is_ajax():
@@ -17,7 +16,10 @@ def addNoteView(request):
             title = form.cleaned_data['title']
             note_id = form.cleaned_data['note_id']
             text = form.cleaned_data['text']
-            tags = form.cleaned_data['tags'].strip().split(",")
+            tags = form.cleaned_data['tags'].strip().split(",") #not changing it into dic bcoz already sending
+            tags_dic = {}
+            for tag in tags:
+                tags_dic[tag] = 1
             if not note_id:
                 note_obj = Note.objects.create(user=user,title=title,text=text) #create will create as well as save too in db.
                 for i in tags:
@@ -27,12 +29,17 @@ def addNoteView(request):
                 # handling all cases of the tags
                 note_obj = Note.objects.get(id=note_id)
                 for t in note_obj.tags.all():
-                    if t.name not in tags:
+                    if t.name not in tags_dic:
                         note_obj.tags.remove(t)
+                    else: #deleting pre-existing element so that we could know what's new tags are
+                        del tags_dic[t.name]
+                for k,v in tags_dic.items():
+                    tag_obj, created = Tag.objects.get_or_create(name=k)
+                    note_obj.tags.add(tag_obj)
                 note_created = False
             for f in files:
                 Image.objects.create(note=note_obj,image=f)
-            date = datetime.datetime.now().strftime('%B') +" "+ datetime.datetime.now().strftime('%d')+", "+datetime.datetime.now().strftime('%Y')
+            note_obj.save() #last_modified field won't update on chaning other model field, save() trigger change
             return getNoteResponseData(note_obj,tags,note_created)
         else:
             print("Form invalid, see below error msg")
@@ -43,7 +50,7 @@ def addNoteView(request):
     return HttpResponseRedirect('/')
 
 def modifyNote(request):
-    if request.is_ajax():
+    if request.is_ajax() and request.method=="POST":
         note_id = request.body
         note_obj = Note.objects.get(id=note_id)
         tags = []
@@ -80,12 +87,13 @@ def getDistinctUserTags(request):
     return Tag.objects.filter(note__user=user).distinct()
 
 def getNoteResponseData(note_obj,tags,note_created):
+    date = datetime.datetime.now().strftime('%B') +" "+ datetime.datetime.now().strftime('%d')+", "+datetime.datetime.now().strftime('%Y')
     response_data = {
             "id": note_obj.id,
             "title":note_obj.title,
             "text":note_obj.text,
             "tags": tags,
-            "last_mod": note_obj.last_modified,
+            "last_mod": date,
             "note_created": note_created
             }
     return JsonResponse(response_data)

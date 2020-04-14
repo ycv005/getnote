@@ -4,7 +4,7 @@
         <small class="card-subtitle mb-2 pt-2 text-muted">Last mod: {{ note.last_modified.date }}</small>
         <br>
         <p class="card-text">{{ note.text|truncatechars:80 }}</p>
-        <div class="diplay:flex">
+        <div id="badge-list">
             {% for tag in note.getNoteTags %}
                 <a href="{% url 'note:tag_filter' tag.slug %}" class="badge badge-primary">#{{ tag.name }}</a>
             {% endfor %}
