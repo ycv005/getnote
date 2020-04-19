@@ -1,20 +1,18 @@
 .DS_STORE
 
 # Virtualenv related
-bin/
 include/
 pip-selfcheck.json
 
-# Byte-compiled / optimized / DLL files #
+# Django related 
+# src/<yourproject>/settings/local.py
+# static-cdn/  # any collected static files 
+
+
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
-
-# Django #
-*.log
-db.sqlite3
-media
-static
 
 # C extensions
 *.so
