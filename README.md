@@ -15,6 +15,13 @@ For Windows & [Git Bash on Window](https://git-scm.com/download/win)-</br>
 For Mac-</br>
 `. venv_getnote/bin/activate` or `venv_getnote myvenv/bin/activate`
 </br></br>
+
+### Dependencies
+```
+pip install django
+pip install pillow
+```
+
 To Run django Server- `python manage.py runserver`</br></br>
 To Run the django Interactive interpreter (shell)- `python manage.py shell`</br></br>
 Any changes to db/models, run following code</br>
