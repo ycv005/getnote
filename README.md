@@ -1,4 +1,5 @@
 # GetNote
+<<<<<<< HEAD
 
 ### 📖 Install
 
@@ -20,6 +21,25 @@ $ python manage.py runserver
 # Load the site at http://127.0.0.1:8000
 ```
 
+=======
+(Optional) First of all, [Install Virtual Env](https://pypi.org/project/virtualenv/)
+</br>
+(Optional) Creating Virtual Env(venv_getnote is my venv name, choose your acc.)-
+`python -m venv venv_getnote` 
+</br></br>
+Install django- `pip install django`
+</br></br>
+Command to Activate the Virtual env-</br></br>
+For Linux Environment-</br>
+ `. venv_getnote/bin/activate` (my virtual env name- venv_getnote)</br></br>
+For Windows & [Git Bash on Window](https://git-scm.com/download/win)-</br>
+`venv_getnote\Scripts\activate`
+</br></br>
+For Mac-</br>
+`. venv_getnote/bin/activate` or `venv_getnote myvenv/bin/activate`
+</br></br>
+To Run django Server- `python manage.py runserver`</br></br>
+>>>>>>> parent of f250d27... Merge pull request #19 from ycv005/note
 To Run the django Interactive interpreter (shell)- `python manage.py shell`</br></br>
 Any changes to db/models, run following code</br>
 ```
