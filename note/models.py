@@ -3,6 +3,8 @@ from django.db.models.signals import pre_save
 from getnote import settings
 import os
 from django.template.defaultfilters import slugify
+from django_cryptography.fields import encrypt
+
 
 def user_directory_path(instance,filename):
     base_name = os.path.basename(filename)
@@ -27,7 +29,7 @@ class Tag(models.Model):
 class Note(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     title = models.CharField(max_length=30)
-    text = models.TextField(null=True,blank=True)
+    text = encrypt(models.TextField(null=True,blank=True))
     tags = models.ManyToManyField(Tag)
     created_date = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
