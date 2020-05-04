@@ -4,7 +4,9 @@ from .models import Note, Image, Tag
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse_lazy
 import datetime
+from django.db.models import Q
 from django.views.generic import ListView
+
 
 def addNoteView(request):
     if request.method == "POST" and request.is_ajax():
@@ -97,3 +99,17 @@ def getNoteResponseData(note_obj,tags,note_created):
             "note_created": note_created
             }
     return JsonResponse(response_data)
+
+
+class SearchNote(ListView):
+    """Class to render search results"""
+    model = Note
+    template_name = "base/home_page.html"
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        queryset = Note.objects.filter(
+            Q(title__icontains=query) | Q(tags__name__icontains=query)
+            # | Q(text__icontains=query) # will not work bcoz of encryption
+        ).distinct()
+        return queryset

@@ -5,6 +5,7 @@
 - Google Keep's clone
 - Note with CRUD
 - Tags to organize note
+- Search Notes
 - Beautiful yet simple UI
 - Notes are encrpyted & safe with us. ([django-cryptography](https://github.com/georgemarshall/django-cryptography))
 
@@ -44,3 +45,6 @@ To Know the work flow and progress, follow the branch in series
 1. [Master](https://github.com/ycv005/getnote)- All the work will be merged to this branch.
 2. [Accounts](https://github.com/ycv005/getnote/tree/accounts)- Works related to cookies based auth.
 2. [Note](https://github.com/ycv005/getnote/tree/note)- Works related to Note.
+
+### Deployment
+Yet to be deployed
