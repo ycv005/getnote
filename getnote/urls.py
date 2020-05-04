@@ -33,5 +33,4 @@ if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 admin.site.site_header = "getNote Admin"
-admin.site.site_title = "getNote Admin Portal"
-admin.site.index_title = admin.site.site_header
+admin.site.site_title = admin.site.index_title = admin.site.site_header
