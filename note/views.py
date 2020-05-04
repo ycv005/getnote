@@ -4,7 +4,9 @@ from .models import Note, Image, Tag
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse_lazy
 import datetime
+from django.db.models import Q
 from django.views.generic import ListView
+
 
 def addNoteView(request):
     if request.method == "POST" and request.is_ajax():
@@ -39,6 +41,8 @@ def addNoteView(request):
                 note_created = False
             for f in files:
                 Image.objects.create(note=note_obj,image=f)
+            note_obj.title = title
+            note_obj.text = text
             note_obj.save() #last_modified field won't update on chaning other model field, save() trigger change
             return getNoteResponseData(note_obj,tags,note_created)
         else:
@@ -88,6 +92,7 @@ def getDistinctUserTags(request):
 
 def getNoteResponseData(note_obj,tags,note_created):
     date = datetime.datetime.now().strftime('%B') +" "+ datetime.datetime.now().strftime('%d')+", "+datetime.datetime.now().strftime('%Y')
+    note_obj.refresh_from_db()
     response_data = {
             "id": note_obj.id,
             "title":note_obj.title,
@@ -97,3 +102,17 @@ def getNoteResponseData(note_obj,tags,note_created):
             "note_created": note_created
             }
     return JsonResponse(response_data)
+
+
+class SearchNote(ListView):
+    """Class to render search results"""
+    model = Note
+    template_name = "base/home_page.html"
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        queryset = Note.objects.filter(
+            Q(title__icontains=query) | Q(tags__name__icontains=query)
+            # | Q(text__icontains=query) # will not work bcoz of encryption
+        ).distinct()
+        return queryset

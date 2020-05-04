@@ -31,3 +31,6 @@ if settings.DEBUG:
 # https://docs.djangoproject.com/en/3.0/howto/static-files/#serving-static-files-during-development
     urlpatterns+= static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 
     urlpatterns+= static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+admin.site.site_header = "getNote Admin"
+admin.site.site_title = admin.site.index_title = admin.site.site_header
