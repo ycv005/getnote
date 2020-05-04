@@ -1,4 +1,3 @@
-
 <script type="text/javascript">
     $(document).ready(function(){
     $('#addNoteModel').on('show.bs.modal', function (event) {
@@ -43,23 +42,37 @@
         success: function(data){
             document.getElementById("note-form").reset();
             modal.modal('toggle');
+            var shortText = jQuery.trim(data.text).substring(0, 79) + '...';
+            var shortTitle = jQuery.trim(data.title).substring(0, 21);
             if (data.note_created){
-                var shortText = jQuery.trim(data.text).substring(0, 80)
-                var shortTitle = jQuery.trim(data.title).substring(0, 21)
             // we can't include the snippet bcoz- Any jQuery calls will happen after the DOM is loaded. While any include statements will happen before.
-                var note_clone = $(".full-note-col").clone();
-                note_clone.removeClass("d-none");
-                note_clone.find(".card-title").text(shortTitle);
-                note_clone.find(".card-text").text(shortText);
-                console.log("Tag array-",TagArray);
+                var note = $(".full-note-col").clone();
+                note.removeClass("d-none");
+                note.find(".card-title").text(shortTitle);
+                note.find(".card-text").text(shortText);
+                var note_badges = note.find("#badge-list");
                 for(let i=0;i<TagArray.length;i++){
                     var url = "note/tag/"+TagArray[i]
-                    note_clone.find("#badge-list").append(
+                    note_badges.append(
                         "<a href=\""+url +"\" class=\'badge badge-primary\'>#"+ TagArray[i] +'</a>'
                     )
                     console.log("appended a badge");
                 }
-                $(".note-list-row").prepend(note_clone);
+                $(".note-list-row").prepend(note);
+            }
+            else{
+                // note is updated
+                var note = $("#note_"+data.id);
+                note.find(".card-title").text(shortTitle);
+                note.find(".card-text").text(shortText);
+                var note_badges = note.find("#badge-list").text('');
+                for(let i=0;i<TagArray.length;i++){
+                    var url = "note/tag/"+TagArray[i]
+                    note_badges.append(
+                        "<a href=\""+url +"\" class=\'badge badge-primary\'>#"+ TagArray[i] +'</a>'
+                    )
+                    console.log("appended a badge");
+                }
             }
             $("#empty-note-msg").addClass("d-none");
         },

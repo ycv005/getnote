@@ -41,6 +41,8 @@ def addNoteView(request):
                 note_created = False
             for f in files:
                 Image.objects.create(note=note_obj,image=f)
+            note_obj.title = title
+            note_obj.text = text
             note_obj.save() #last_modified field won't update on chaning other model field, save() trigger change
             return getNoteResponseData(note_obj,tags,note_created)
         else:
@@ -90,6 +92,7 @@ def getDistinctUserTags(request):
 
 def getNoteResponseData(note_obj,tags,note_created):
     date = datetime.datetime.now().strftime('%B') +" "+ datetime.datetime.now().strftime('%d')+", "+datetime.datetime.now().strftime('%Y')
+    note_obj.refresh_from_db()
     response_data = {
             "id": note_obj.id,
             "title":note_obj.title,
