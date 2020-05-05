@@ -21,12 +21,9 @@ class HomePage(ListView):
         # json_serializer = serializers.get_serializer("json")()
         if self.request.user.is_authenticated:
             tagList = ""
-            for q in getDistinctUserTags(self.request):
+            tags = getDistinctUserTags(self.request)
+            for q in tags:
                 tagList+=q.name+","
             context['tagList']=tagList[:len(tagList)-1]
-            # noteList = list(Note.objects.filter(user_id=self.request.user.id))
-            # print("here is teh note list",noteList)
-            # noteList = json_serializer(Note.objects.filter(user_id=self.request.user.id),ensure_ascii=False)
-            # noteList = serializers.serialize("json", Note.objects.filter(user_id=self.request.user.id))
-            # context['noteList']= JsonResponse(noteList,safe=False)
+            context['tags'] = tags
         return context

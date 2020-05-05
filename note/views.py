@@ -79,9 +79,11 @@ class TagFilterView(ListView):
         context = super(TagFilterView, self).get_context_data(**kwargs)
         if self.request.user.is_authenticated:
             tagList = ""
-            for q in getDistinctUserTags(self.request):
+            tags = getDistinctUserTags(self.request)
+            for q in tags:
                 tagList+=q.name+","
             context['tagList']=tagList[:len(tagList)-1]
+            context['tags'] = tags
         return context
 
 def getDistinctUserTags(request):
