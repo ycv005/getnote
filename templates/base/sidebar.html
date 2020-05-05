@@ -1,0 +1,8 @@
+<div id="mySidenav" class="sidenav bg-light">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>    
+    <a href="{% url 'home_page' %}" class="text-sm">All Note</a>
+    {% for tag in tags %}
+        <div class="dropdown-divider"></div>
+        <a href="{% url 'note:tag_filter' tag.slug %}" class="text-sm">{{ tag.name }}</a>
+    {% endfor %}
+  </div>

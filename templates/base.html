@@ -8,7 +8,7 @@
         {% include 'base/css.html' %}
     </head>
     <body>
-        {% include 'base/navigation_bar.html' %}
+        {% include 'base/navigation_bar.html' with tags=tags %}
         <div class="container">
             
             {% block content %}
