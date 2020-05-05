@@ -18,14 +18,12 @@ def addNoteView(request):
             title = form.cleaned_data['title']
             note_id = form.cleaned_data['note_id']
             text = form.cleaned_data['text']
-            tags = form.cleaned_data['tags'].strip().split(",") #not changing it into dic bcoz already sending
-            tags_dic = {}
-            for tag in tags:
-                tags_dic[tag] = 1
+            tags = tagsInDic(form.cleaned_data['tags'].strip())
+            tags_dic = tags.copy()
             if not note_id:
                 note_obj = Note.objects.create(user=user,title=title,text=text) #create will create as well as save too in db.
-                for i in tags:
-                    tag_obj, created = Tag.objects.get_or_create(name=i)
+                for k in tags.keys():
+                    tag_obj, created = Tag.objects.get_or_create(name=k)
                     note_obj.tags.add(tag_obj) #it won't add duplicated as stated in django docs
             else:
                 # handling all cases of the tags
@@ -116,3 +114,14 @@ class SearchNote(ListView):
             # | Q(text__icontains=query) # will not work bcoz of encryption
         ).distinct()
         return queryset
+
+def tagsInDic(tags):
+    """Convert comma separated tags into dictionary"""
+    last_ind = 0
+    res = {}
+    for i, c in enumerate(tags):
+        if c == ',':
+            res[tags[last_ind:i]] = 1
+            last_ind = i + 1
+    res[tags[last_ind:]] = 1
+    return res
