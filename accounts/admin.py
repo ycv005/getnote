@@ -1,8 +1,7 @@
 from django.contrib import admin
 from django import forms
 from django.contrib.auth.models import Group
-from django.contrib.auth.admin import UserAdmin
-from .models import User
+from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
@@ -12,7 +11,7 @@ class UserCreationForm(forms.ModelForm):
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
     # (https://stackoverflow.com/questions/39476334/why-class-meta-is-necessary-while-creating-a-model-form)
     class Meta: #class Meta sets the what model and field this form will use
-        model = User
+        model = get_user_model()
         fields = ('email','name')
 
     # clean_attribute is used to provide validation
@@ -37,7 +36,7 @@ class UserChangeForm(forms.ModelForm):
     password = ReadOnlyPasswordHashField()
 
     class Meta:
-        model = User
+        model = get_user_model()
         fields = ('email', 'password', 'name', 'active', 'admin','staff')
 
     def clean_password(self):
@@ -65,6 +64,6 @@ class UserAdmin(BaseUserAdmin):
     ordering = ('email',)
     filter_horizontal = ()
 
-admin.site.register(User, UserAdmin)
+admin.site.register(get_user_model(), UserAdmin)
 # since we are not using django built-in permission , thus unregistering the Group Model
 admin.site.unregister(Group)
