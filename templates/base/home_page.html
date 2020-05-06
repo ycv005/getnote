@@ -2,14 +2,16 @@
 
 {% block content %}
     <!-- https://docs.djangoproject.com/en/3.0/ref/templates/language/#template-inheritance -->
-    {% if user.is_authenticated %}
-        {% include 'snippet/note.html' %}
-        
-        {% include 'list_note.html' with note_list=object_list %}
-    {% else %}
-        <div class="alert alert-primary my-4" role="alert">
-            <h4 class="text-center">Join GetNote to add notes here. <a href="{% url "accounts:login_page" %}">Login</a></h4>
-        </div>    
-    {% endif %}
+    <div class="container-fluid">
+        {% if user.is_authenticated %}
+            {% include 'snippet/note.html' %}
+            
+            {% include 'list_note.html' with note_list=object_list %}
+        {% else %}
+            <div class="alert alert-primary my-4" role="alert">
+                <h4 class="text-center">Join GetNote to add notes here. <a href="{% url "accounts:login_page" %}">Login</a></h4>
+            </div>
+        {% endif %}
+    </div>
         
 {% endblock content %}

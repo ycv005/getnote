@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="container col-5">
-    <div class="card shadow p-3 mb-5 bg-white rounded align-self-middle">
+  <div class="container col-5 login-signup">
+    <div class="card shadow p-3 mb-5 bg-white rounded">
       <h5 class="card-header text-center">Login</h5>
       <div class="card-body">
         <form id="login-form" method="post" action="{% url "accounts:login_page" %}">{% csrf_token %}
