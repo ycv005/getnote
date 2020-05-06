@@ -1,0 +1,14 @@
+html, body {
+    height: 100%;
+}
+
+.login-signup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    min-height: 100%;
+    display: flex;
+}

@@ -1,10 +1,34 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign up</button>
-  </form>
+<div class="container col-5 login-signup">
+  <div class="card shadow p-3 mb-5 bg-white rounded align-self-middle">
+    <h5 class="card-header text-center">SignUp</h5>
+    <div class="card-body">
+      <form id="login-form" method="post" action="{% url "accounts:signup_page" %}">{% csrf_token %}
+          <table class="table">
+              <tr>
+                <td><label for="id_name">Name</label></td>
+                <td><input id="id_name" name="name" type="text" class="form-control"></td>
+              </tr>
+              <tr>
+                  <td><label for="id_email">Email</label></td>
+                  <td><input id="id_email" name="username" type="text" class="form-control"></td>
+              </tr>
+              <tr>
+                  <td><label for="id_password">Password</label></td>
+                  <td><input id="id_password" name="password" type="password" class="form-control"></td>
+              </tr>
+              <tr>
+                <td><label for="id_password2">Confirm Password</label></td>
+                <td><input id="id_password2" name="password2" type="password" class="form-control"></td>
+            </tr>
+          </table>
+          <button type="submit" class="btn btn-primary pull-right">Sign Up</button>
+          <input type="hidden" name="next" value="{{ next }}" />
+      </form>
+    </div>
+    <p class="mt-2">Have an account- <a href="{% url "accounts:login_page" %}">Login</a></p>
+  </div>
+</div>
 {% endblock content %}
