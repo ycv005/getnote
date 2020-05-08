@@ -21,8 +21,8 @@
             <input type="hidden" name="next" value="{{ next }}" />
         </form>
       </div>
-      <p class="mt-2">Don't have account- <a href="{% url "accounts:signup_page" %}">Sign Up</a></p>
-      <a href="{% url "accounts:password_reset" %}">Forgot Password?</a>
+      <p class="mt-2 ml-4">Don't have account- <a href="{% url "accounts:signup_page" %}">Sign Up</a></p>
+      <a class="ml-4" href="{% url "password_reset" %}">Forgot Password?</a>
     </div>
   </div>
 {% endblock content %}

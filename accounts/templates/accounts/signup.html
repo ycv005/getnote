@@ -5,7 +5,7 @@
   <div class="card shadow p-3 mb-5 bg-white rounded align-self-middle">
     <h5 class="card-header text-center">SignUp</h5>
     <div class="card-body">
-      <form id="login-form" method="post" action="{% url "accounts:signup_page" %}">{% csrf_token %}
+      <form id="signup-form" method="post" action="{% url "accounts:signup_page" %}">{% csrf_token %}
           <table class="table">
               <tr>
                 <td><label for="id_name">Name</label></td>
@@ -29,7 +29,7 @@
           <input type="hidden" name="next" value="{{ next }}" />
       </form>
     </div>
-    <p class="mt-2">Have an account- <a href="{% url "accounts:login_page" %}">Login</a></p>
+    <p class="mt-2 ml-4">Have an account- <a href="{% url "accounts:login_page" %}">Login</a></p>
   </div>
 </div>
 {% endblock content %}

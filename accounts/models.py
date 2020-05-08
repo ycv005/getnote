@@ -24,8 +24,8 @@ class CustomUserManager(BaseUserManager):
             password=password,
             name=name,
         )
-        user.admin = True
-        user.staff = True
+        user.is_admin = True
+        user.is_staff = True
         user.save(using=self._db)
         return user
     
@@ -35,7 +35,7 @@ class CustomUserManager(BaseUserManager):
             password=password,
             name=name,
         )
-        user.staff = True
+        user.is_staff = True
         user.save(using=self._db)
         return user
 
@@ -45,9 +45,9 @@ class CustomUserManager(BaseUserManager):
 class User(AbstractBaseUser):
     name = models.CharField(max_length=30)
     email = models.EmailField(max_length=50, unique=True)
-    admin = models.BooleanField(default=False)
-    staff = models.BooleanField(default=False)
-    active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
     USERNAME_FIELD = 'email' #used as the username, i.e., login 
     REQUIRED_FIELDS = ['name']
@@ -66,15 +66,3 @@ class User(AbstractBaseUser):
         # "Does the user have permissions to view the app `app_label`?"
         # Simplest possible answer: Yes, always
         return True
-
-    @property
-    def is_active(self):
-        return self.active
-
-    @property
-    def is_staff(self):
-        return self.staff
-    
-    @property
-    def is_admin(self):
-        return self.admin
