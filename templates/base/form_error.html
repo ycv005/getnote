@@ -1,0 +1,14 @@
+{% if form.errors %}
+<div class="alert alert-danger">
+    {% for key, value in form.errors.items %}    
+    <span>
+        {% if key == "__all__" %}
+            {{ value }}
+        {% else %}
+            {{ key }}:{{ value }}
+        {% endif %}
+    </span>
+    {% endfor %}
+</div>
+{% endif %}
+    

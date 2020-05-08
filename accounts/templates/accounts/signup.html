@@ -13,18 +13,19 @@
               </tr>
               <tr>
                   <td><label for="id_email">Email</label></td>
-                  <td><input id="id_email" name="username" type="text" class="form-control"></td>
+                  <td><input id="id_email" name="email" type="text" class="form-control"></td>
               </tr>
               <tr>
-                  <td><label for="id_password">Password</label></td>
-                  <td><input id="id_password" name="password" type="password" class="form-control"></td>
+                  <td><label for="id_password1">Password</label></td>
+                  <td><input id="id_password1" name="password1" type="password" class="form-control"></td>
               </tr>
               <tr>
                 <td><label for="id_password2">Confirm Password</label></td>
                 <td><input id="id_password2" name="password2" type="password" class="form-control"></td>
             </tr>
           </table>
-          <button type="submit" class="btn btn-primary pull-right">Sign Up</button>
+          {% include 'base/form_error.html' with form=form %}
+          <button type="submit" class="btn btn-primary">Sign Up</button>
           <input type="hidden" name="next" value="{{ next }}" />
       </form>
     </div>
