@@ -8,27 +8,21 @@
         <form id="login-form" method="post" action="{% url "accounts:login_page" %}">{% csrf_token %}
             <table class="table">
                 <tr>
-                    <td><label for="id_email">Username</label></td>
-                    <td><input id="id_email" name="username" type="text" class="form-control"></td>
+                    <td><label for="id_username">Username/Email</label></td>
+                    <td><input id="id_username" name="username" type="text" class="form-control"></td>
                 </tr>
                 <tr>
                     <td><label for="id_password">Password</label></td>
                     <td><input id="id_password" name="password" type="password" class="form-control"></td>
                 </tr>
             </table>
-            {% if form.errors %}
-                <p class=" label label-danger">
-                    Your username and password didn't match. 
-                    Please try again.
-                </p>
-            {% endif %}
-
+            {% include 'base/form_error.html' with form=form %}
             <input type="submit" value="Login" class="btn btn-primary pull-right" />
             <input type="hidden" name="next" value="{{ next }}" />
         </form>
       </div>
-      <p class="mt-2">Don't have account- <a href="{% url "accounts:signup_page" %}">Sign Up</a></p>
-      <a href="#">Forgot Password?</a>
+      <p class="mt-2 ml-4">Don't have account- <a href="{% url "accounts:signup_page" %}">Sign Up</a></p>
+      <a class="ml-4" href="{% url "password_reset" %}">Forgot Password?</a>
     </div>
   </div>
 {% endblock content %}
