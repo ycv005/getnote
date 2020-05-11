@@ -1,0 +1,14 @@
+.flex-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.wrap {
+ flex-wrap: wrap;
+}
+
+.note-preview-card {
+    padding: 5px;
+    width: 300px;
+    margin: 10px;
+}

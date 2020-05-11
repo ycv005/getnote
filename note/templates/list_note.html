@@ -1,8 +1,8 @@
 <div class="container-fluid">
-    <div class="row note-list-row">
+    <div class="row note-list-row flex-container wrap">
         {% if note_list %}
             {% for note in note_list %}
-                <div class="col-3">
+                <div class="wrap">
                     {% include 'snippet/preview.html' with note=note %}
                 </div>
             {% endfor %}
